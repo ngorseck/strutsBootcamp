@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.devMode" value="true"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+
+        <default-action-ref name="index"/>
+
+        <action name="loginAction" class="com.samanecorp.struts2.controller.LoginAction" method="login">
+            <result name="login">index.jsp</result>
+            <result name="welcome" type="redirectAction">
+				<param name="actionName">welcomeAction</param>
+			</result>
+            <result name="error">index.jsp</result>
+        </action>
+        
+        <action name="logoutAction" class="com.samanecorp.struts2.controller.LogoutAction" method="index">
+            <result name="logout" type="redirectAction">
+				<param name="actionName">loginAction</param>
+			</result>
+        </action>
+        
+        <action name="welcomeAction" class="com.samanecorp.struts2.controller.WelcomeAction" method="index">
+            <result name="welcome">welcome.jsp</result>
+        </action>
+
+ 		<action name="adminAction" class="com.samanecorp.struts2.controller.AdminAction" method="admin">
+            <result name="admin">/WEB-INF/jsp/admin/admin.jsp</result>
+        </action>
+        
+        <action name="adminEditAction" class="com.samanecorp.struts2.controller.AdminAction" method="edit">
+            <result name="edit" type="redirectAction">
+				<param name="actionName">adminAction</param>
+			</result>
+        </action>
+        
+        <action name="adminDeleteAction" class="com.samanecorp.struts2.controller.AdminAction" method="delete">
+            <result name="delete" type="redirectAction">
+				<param name="actionName">adminAction</param>
+			</result>
+        </action>
+    </package>
+
+    <!-- Add addition packages and configuration here. -->
+</struts>
